@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<title>Cyclick</title>
+	
+	<!-- bootstrap - Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<!-- css -->
+	<link rel="stylesheet" type="text/css" href="public/css/style.css">
+	<!-- mediaqueries -->
+	<link rel="stylesheet" type="text/css" href="public/css/mediaqueries.css">
+
+	<!-- mapbox-->
+	<link href='https://api.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.css' rel='stylesheet' />
+	<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v1.0.0/MarkerCluster.css' rel='stylesheet' />
+
+	<!--viewport -->
+	<meta name="viewport" content="initial-scale=1">
+
+	<!--fonts-->
+	<link href="https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Jaldi&display=swap" rel="stylesheet">
+
+	<!--favicon-->
+	<link rel="icon" href="public/img/cyclick.png" />
+</head>
+
+<body>
+	<div id="containerAll">
+		
+		<header>
+			<div id="logoHeader">
+				<!--display none on h1 -->
+				<h1>Projet 3</h1>
+				<img alt="photo-logo" src="public/img/cyclick.png">
+			</div>
+
+			<nav class="navbar navbar-expand-lg navbar-light ">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarText">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item active">
+							<a class="nav-link" href="#titleDiapo">Réserver votre vélo ?</a>
+						</li>
+						<li class="nav-item active">
+							<a class="nav-link" href="#carte">Voir la carte</a>
+						</li>
+					</ul>
+
+				</div>
+			</nav>
+
+		</header>
+
+
+		<section id="section1">
+			<h2 id="titleDiapo">Comment réserver <br/> votre vélo ?</h2>
+
+			<!--les photos-->
+			<div id="slider">
+
+				<div class="sliderImg" id="img1" >
+					<img src="public/img/4.png" alt="photo du slider">
+					<p class="pImg">1/4</p>
+				</div>
+
+				<div class="sliderImg" id="img2" >
+					<img src="public/img/5.png" alt="photo du slider">
+					<p class="pImg">2/4</p>
+				</div>
+
+				<div class="sliderImg" id="img3" >
+					<img src="public/img/6.png" alt="photo du slider">
+					<p class="pImg">3/4</p>
+				</div>
+
+				<div class="sliderImg" id="img4" >
+					<img src="public/img/3.png" alt="photo du slider">
+					<p class="pImg">4/4</p>
+				</div>
+
+
+				<!--flèches-->
+				<button class="sliderBtn" id="chevronLeft"><i class="fas fa-chevron-left"></i></button>
+				<button class="sliderBtn" id="chevronRight"><i class="fas fa-chevron-right"></i></button>
+
+				<button class="sliderBtn" id="play"><i class="fas fa-play"></i></button>
+				<button class="sliderBtn" id="pause"><i class="fas fa-pause"></i></button>
+
+
+			</div>
+
+		</section>
+
+
+
+
+		<section id="section2">
+			<h2 id="carte">Trouvez la station <br/> la plus proche</h2>
+
+			<div id="zoneReservation">
+
+				<div>
+					<div id='map' style='width: 700px; height: 600px;'></div>
+
+					<!-- timer -->
+					<div id="zoneTimer" style="display:none">
+						<p>
+							Un vélo a été retenu pour <span id="spanName"></span> à cette station : <br/><span id="spanAdresse"></span>. Il vous reste : 
+						</p>
+						<p id="timer">
+							20 : 00 
+						</p>
+						<p>
+							pour confirmer votre réservation 
+						</p>
+					</div>
+
+					<!-- message confirm reserv -->
+					<div id="reservConfirm" style="display:none">
+						<p> <i class="fas fa-thumbs-up fa-2x"></i> 
+						Votre réservation est bien confirmée ! Votre vélo vous attend !</p>
+					</div>
+				</div>
+
+
+				<!-- formulaire réservation -->
+				<form action="#" method="POST">
+					<label>Adresse</label>
+					<input type="hidden" name="adresse" id="adresseMapInput">
+					<p id="adresseMap"></p>
+					<p id ="adresseMapConfirmed"></p>
+
+					<label>Nom</label>
+					<input type="text" name="nom" id="inputNom">
+
+
+					<label>Prénom</label>
+					<input type="text" name="prenom" id="inputPrenom">
+
+					<!-- canvas signature -->
+					<div>
+						<p id="derniereEtape">Une dernière étape avant de réserver votre vélo, signez ici !</p>
+						
+						<div id="canvasDiv" style="display:none"></div>
+						<button id="clearCanvas" type="button" style="display:none">Effacer</button>
+					</div>
+
+					
+
+					
+
+					<!-- <div id="canvasDiv" style="display: none">
+			
+						<div >
+							
+						 		<canvas id="sig-canvas" width="270" height="160">
+						 		</canvas>
+						 	
+						</div>
+						<div >
+								<button type="submit" name="submit" id="btnValid" style="display:none">Valider</button>
+								 <button class="btn btn-primary" id="sig-submitBtn">Submit Signature</button> -->
+								<!--<button class="btn btn-default" id="sig-clearBtn">Clear Signature</button>
+							
+						</div>
+
+					</div> -->
+
+					<!-- buttons submit -->
+					<button type="submit" name="submit" id="btnReserv">Réserver un vélo</button>
+					<button type="submit" name="submit" id="btnValid" style="display:none">Valider</button>
+					<button type="submit" name="submit" id="btnNewOrder" style="display:none">Réserver plutôt un autre vélo</button>
+					<!--<button type="submit" name="submit" id="btnCancel" style="display:none">Annuler</button>-->
+
+					<!-- messages d'erreur-->
+					<p id="zoneErrorPrenom"></p>
+					<p id="zoneErrorNom"></p>
+					<p id="zoneErrorAdresse"></p>
+
+
+
+				</form>
+
+			</div>
+		</section>
+
+		<!--section 3 pub -->
+
+		<section id="section3">
+			<h5 class="displayNone">Cyclick vous veut du bien...</h5>
+			<div id="divPub"></div>
+		</section>
+
+
+		
+		
+
+
+
+		<footer id="footer">
+			<p>Site réalisé par Jally Phejar 2019 - 2020</p>
+		</footer>
+
+	</div><!--div containerAll-->
+
+	
+
+	
+	<!-- jQuery -->
+	<script src="public/js/jquery-3.4.1.js"></script>
+	<!-- mapbox -->
+	<script src='https://api.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.js'></script>
+	<script src='https://api.mapbox.com/mapbox.js/v3.2.1/mapbox.js'></script>
+	<!-- html canvas -->
+	<script src="public/js/Canvas.js"></script>
+	<!-- timer -->
+	<script src="public/js/Timer.js"></script>
+	<!-- form -->
+	<script src="public/js/form.js"></script>
+	<!-- map -->
+	<script src="public/js/Ajax.js"></script>
+	<script src="public/js/MapData.js"></script>
+	<!-- diapo -->
+	<script src="public/js/Diapo.js"></script>
+
+	<!-- main -->
+	<script src="public/js/main.js"></script>
+
+	<!-- fontawesome -->
+	<script src="https://kit.fontawesome.com/7e70710549.js"></script>
+	<!--jquery bootstrap-->
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+	
+
+
+
+</body>
+</html>
