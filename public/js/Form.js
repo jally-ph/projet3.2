@@ -130,6 +130,12 @@ $("#btnNewOrder").click(function(e){
 	document.getElementById('inputNom').removeAttribute('disabled');
 	document.getElementById('inputPrenom').removeAttribute('disabled');
 
+	// session destroyed
+	sessionStorage.clear();
+	sessionStorage.removeItem('timerMin');
+	
+
+
 
 });
 
