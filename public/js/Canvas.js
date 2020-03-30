@@ -20,6 +20,7 @@ class Canvas {
 		var canvasDiv = document.getElementById('canvasDiv');
 		this.canvas = document.createElement('canvas');
 		//this.canvas.setAttribute('width', this.canvasWidth);
+
 		this.canvas.setAttribute('width', $('#derniereEtape').width());
 		this.canvas.setAttribute('height', this.canvasHeight);
 		this.canvas.setAttribute('id', 'canvas');

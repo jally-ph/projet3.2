@@ -71,6 +71,10 @@
 		bottom: 0px;*/
 	}
 
+	/*canvas{
+		width: 118px;
+	}*/
+
  }
 
 
@@ -118,18 +122,29 @@
 	#divPub{
 		margin-top: 300px;
 	}
+
+	/*canvas{
+		width: 431px;
+	}
+*/
 }
 
 
 /*===========================================================*/
 
-/* Large devices (desktops, 992px and up)
-@media (min-width: 992px) {  }*/
+/* Large devices (desktops, 992px and up) */
+@media (max-width: 992px) { 
+	/*canvas{
+		width: 260px;
+	}*/
+
+
+}
 
 /*===========================================================*/
 
 /* Extra large devices (large desktops, 1200px and up)*/
-@media (min-width: 1200px) {
+@media (min-width: 993px) {
 
 	#containerAll {
     height: 3200px;
@@ -138,4 +153,11 @@
 	#section2 {
 		height: 1000px;
 	}
+
+	/*canvas{
+		width: 242px;
+	}*/
+
+
+	
  }

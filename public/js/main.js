@@ -133,34 +133,36 @@ canvas.executeCanvas();
 canvas.canvas.addEventListener("touchstart", function(e)
 {
 	// Mouse down location
-	var mouseX = (e.changedTouches ? e.changedTouches[0].pageX : e.pageX) - this.offsetLeft,
-	mouseY = (e.changedTouches ? e.changedTouches[0].pageY : e.pageY) - this.offsetTop;
+	var offset = $('#canvasDiv').offset();
+	var mouseX = (e.changedTouches ? e.changedTouches[0].pageX : e.pageX) - offset.left,
+	mouseY = (e.changedTouches ? e.changedTouches[0].pageY : e.pageY) - offset.top;
 	
-	this.paint = true;
-	this.addClick(mouseX, mouseY, false);
-	this.redraw();
+	canvas.paint = true;
+	canvas.addClick(mouseX, mouseY, false);
+	canvas.redraw();
 }, false);
 
 canvas.canvas.addEventListener("touchmove", function(e){
-	var mouseX = (e.changedTouches ? e.changedTouches[0].pageX : e.pageX) - this.offsetLeft,
-	mouseY = (e.changedTouches ? e.changedTouches[0].pageY : e.pageY) - this.offsetTop;
+	var offset = $('#canvasDiv').offset();
+	var mouseX = (e.changedTouches ? e.changedTouches[0].pageX : e.pageX) - offset.left,
+	mouseY = (e.changedTouches ? e.changedTouches[0].pageY : e.pageY) - offset.top;
 
-	if(this.paint){
+	if(canvas.paint){
 		//nouveau btn : valider (apparait si on fait un trait)
 		document.getElementById('btnValid').style.display = 'block';
-		this.addClick(mouseX, mouseY, true);
-		this.redraw();
+		canvas.addClick(mouseX, mouseY, true);
+		canvas.redraw();
 	}
 	e.preventDefault()
 }, false);
 
 canvas.canvas.addEventListener("touchend", function(e){
-	this.paint = false;
-	this.redraw();
+	canvas.paint = false;
+	canvas.redraw();
 }, false);
 
 canvas.canvas.addEventListener("touchcancel", function(e){
-	this.paint = false;
+	canvas.paint = false;
 }, false);
 
 
@@ -170,10 +172,10 @@ canvas.canvas.addEventListener("touchcancel", function(e){
 //================================================================================================
 //TIMER
 //SESSION STORAGE - si sessionsto à les var min et sec, il les récupère et continue le décompte
-if (sessionStorage.timerMin && sessionStorage.timerSec){
-	document.getElementById('zoneTimer').style.display = 'block';
-	var timer = new Timer();
-}
+// if (sessionStorage.timerMin && sessionStorage.timerSec){
+// 	document.getElementById('zoneTimer').style.display = 'block';
+// 	var timer = new Timer();
+// }
 
 if (localStorage.nom && localStorage.prenom && sessionStorage.adresse){
 			//timer ::: spanName
@@ -183,12 +185,12 @@ if (localStorage.nom && localStorage.prenom && sessionStorage.adresse){
 		}
 
 
-		$("#btnNewOrder").click(function(e){
-			sessionStorage.removeItem('timerMin');
-			sessionStorage.removeItem('timerSec');
-			clearInterval(timer.timer);
+		// $("#btnNewOrder").click(function(e){
+		// 	sessionStorage.removeItem('timerMin');
+		// 	sessionStorage.removeItem('timerSec');
+		// 	clearInterval(timer.timer);
 			
-		});
+		// });
 
 
 

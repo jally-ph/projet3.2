@@ -14,12 +14,12 @@ class Timer {
 
 		}
 		else{
-			this.min = 20; //-diff ?? nécessaire?
+			this.min = 1; //-diff ?? nécessaire?
 			this.sec = 0;
 		}
 
-		let that = this;
-		this.timer = setInterval(function(){that.start()}, 1000);
+		// let that = this;
+		// this.timer = setInterval(function(){that.start()}, 1000);
 
 	}
 
@@ -38,11 +38,20 @@ class Timer {
 		sessionStorage.setItem("timerMin", this.min);
 		sessionStorage.setItem("timerSec", this.sec);
 
+		// auparavant dans le form.js
+		$("#btnNewOrder").click(function(e){
+
+		 	sessionStorage.removeItem('timerMin');
+		 	sessionStorage.removeItem('timerSec');
+		 	clearInterval(this.timer);			
+		});
+
+
 		if (this.min <= 0 && this.sec <= 0){
 			//dans localstorage, nom et prénom ne restent pas
-			localStorage.removeItem('prenom');
-			localStorage.removeItem('nom');
-			sessionStorage.removeItem('adresse');
+			// localStorage.removeItem('prenom');
+			// localStorage.removeItem('nom');
+			// sessionStorage.removeItem('adresse');
 			document.getElementById('zoneTimer').style.display = 'none';
 			
 			sessionStorage.removeItem('timerMin');
@@ -51,6 +60,7 @@ class Timer {
 			
 		}
 
+		
 		var textmin = this.min;
 		var textsec = this.sec;
 
@@ -62,13 +72,16 @@ class Timer {
 		}
 		this.timerElt.textContent = textmin + " : " + textsec;
 
-		// $("#btnNewOrder").click(function(e){
-		// 		// sessionStorage.removeItem('timerMin');
-		// 		// sessionStorage.removeItem('timerSec');
-		// 		clearInterval(this.timer);
-		// });
-
 	}
+
+	setTimer() {
+		let that = this;
+		this.timer = setInterval(function(){that.start()}, 1000);
+	}
+
+	// stopTimer() {
+	// 	clearInterval(this.timer);
+	// }
 
 
 

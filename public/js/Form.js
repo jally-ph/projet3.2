@@ -62,10 +62,8 @@ $("#btnReserv").click(function(e){
 
 			if (inputNom.length > 2 && inputPrenom.length > 2) {
 
-				
-
-				var canvas = document.getElementById('canvasDiv');
-				canvas.style.display = 'block';
+				var canvasDiv = document.getElementById('canvasDiv');
+				canvasDiv.style.display = 'block';
 
 				//session storage (dans localstorage nom et prénom ne restent pas)
 				localStorage.setItem("prenom", inputPrenom);
@@ -104,13 +102,12 @@ $("#btnValid").click(function(e){
 	document.getElementById('zoneTimer').style.display = 'block';
 	
 	var timer = new Timer();
+	timer.setTimer();
 	
 	document.getElementById('btnValid').style.display = 'none';
 	document.getElementById('clearCanvas').style.display = 'none';
 	document.getElementById('btnNewOrder').style.display = 'block';
-
-	// sessionStorage.timerSec = 00;
-	// sessionStorage.timerMin = 20;
+	
 	
 });
 
@@ -131,9 +128,10 @@ $("#btnNewOrder").click(function(e){
 	document.getElementById('inputPrenom').removeAttribute('disabled');
 
 	// session destroyed
-	sessionStorage.clear();
-	sessionStorage.removeItem('timerMin');
-	
+	// var timer = new Timer();
+	// timer.stopTimer();
+	// sessionStorage.removeItem('timerMin');
+	// sessionStorage.removeItem('timerSec');
 
 
 
