@@ -11,19 +11,14 @@ class Canvas {
 		this.paint;
 		this.canvas;
 		this.context;
-
 	}
 
-	/* Creates a canvas element*/
+	/* Création  du canvas */
 	executeCanvas(){
-		// Create the canvas (Neccessary for IE because it doesn't know what a canvas element is)
-		var canvasDiv = document.getElementById('canvasDiv');
+		// Crée canvas (pour IE parce qu'il ne sait pas c'est quoi un canvas)
 		this.canvas = document.createElement('canvas');
-		//this.canvas.setAttribute('width', this.canvasWidth);
-
-		this.canvas.setAttribute('width', $('#derniereEtape').width());
-		this.canvas.setAttribute('height', this.canvasHeight);
 		this.canvas.setAttribute('id', 'canvas');
+		var canvasDiv = document.getElementById('canvasDiv');
 		canvasDiv.appendChild(this.canvas);
 		if(typeof G_vmlCanvasManager != 'undefined') {
 			this.canvas = G_vmlCanvasManager.initElement(this.canvas);
@@ -42,11 +37,10 @@ class Canvas {
 		this.context.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
 		document.getElementById('btnValid').style.display = 'none';
 		document.getElementById('clearCanvas').style.display = 'none';
-		
+		document.getElementById('btnValidFinal').style.display = 'none';
 	}
 
 	redraw(){
-		// this.clearCanvas();
 		
 		var radius = 3;
 		this.context.strokeStyle = "black";
@@ -68,10 +62,4 @@ class Canvas {
 	}
 
 }
-
-
-////////////////////////////////////////////////////////////////////////////////////main!!!
-
-
-
 

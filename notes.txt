@@ -1,0 +1,376 @@
+oral Openclassrooms Projet 3
+
+
+1) Index
+
+head
+- meta charset : paramétrer pour reconnaître la langue française et ses caractères
+- title
+- bootstrap : +Adaptable
+- mapbox
+- viewport : +Polices adaptables, zoom
+- favicon : logo
+
+header
+- logo
+- navbar
+- ancres de la navbar
+
+section 1
+- slider : étapes pr réserver vélo
+- btns navigation
+- play / pause
+
+section 2
+- map : markers
+- timer : display-none - s'affichera sous la map
+- message de confirmation :  display-none - remplacera le timer
+- form : réserver vélo
+- canvas : display-none - s'affichera après valid du form
+- btns et messages d'erreur
+
+section 3
+- espace pub
+
+footer
+
+liens javascript
+- jQuery : utiliser avantages de jQuery
+- mapbox
+- canvas, timer, ajax, mapdata et diapo : classes
+- form : X
+- main : qui regroupe les objets instanciés
+
+
+===> MAIN.JS
+
+
+2) Main
+
+- Ajax : instanciation de l'objet crée à partir de la classe Ajax
+
+===> AJAX.JS
+
+
+3) Ajax
+
+- use strict : obligé de déclarer une var avant de pvoir l'utiliser, évite les grosses erreurs
+- ajax : rapides mises à jour de page web, 
+L'AJAX est donc un ensemble de technologies visant à effectuer des transferts de données. Dans ce cas, il faut savoir structurer nos données. Il existe de nombreux formats pour transférer des données, nous allons voir ici les quatre principaux :
+Le format texte est le plus simple
+Le HTML
+Le XML
+Le plus courant est le JSON
+
+- instancie un obj (new) XML : ?
+- récupère les données JSON de l'API Mapbox : url > dans mapdata.js
+- callback : une fonction de rappel (callback en anglais) ou fonction de post-traitement est une fonction qui est passée en argument à une autre fonction. Cette dernière peut alors faire usage de cette fonction de rappel comme de n'importe quelle autre fonction, alors qu'elle ne la connaît pas par avance.
+- condition : entre 200 et avant 400 = pas d'erreurs
+	f° callback = contient la réponse de la req
+	autrement envoie erreur
+
+
+===> MAPDATA.JS
+
+
+4) Mapdata
+
+- constructor : la première méthode pr instancier l'objet; Le rôle du constructeur est de déclarer et de permettre d'initialiser les données membres de la classe, ainsi que de permettre différentes actions (définies par le concepteur de la classe) lors de l'instanciation.
+- argument de const = ajax : 
+
+===> MAIN.JS
+
+instanciation de Mapdata
+- argument = ajax (ajax défini au-dessus!)
+
+===> MAPDATA.JS
+
+- données ajax dans this.ajax
+- this.url : nécessaire à la req ajax (savoir où trouver les données)
+- this.mapInfo() : lance directement la f°
+	clé pr accéder aux données de localisation
+	var map : crée une map + coordonnées de Toulouse + zoom
+
+- this.ajax.ajaxGet() : on appel f° ajaxGet
+	JSON.parse() : on traduit la reponse JSON en lang Javascript 
+	for : on lit le tableau 
+	création var : on stocke les diff données
+	var geojson : on réutilise ces var (coordinates, properties...)
+
+- geojson.features.forEach(function(marker) : on place les markers sur la map
+	var el : crée <i> = marker
+	setPopup : ajoute des popups 
+	setHTML : diff infos dedans : address, status, available bikes
+	addTo(map) : ajoute tout cela à la map
+
+
+===> MAIN.JS
+
+- var slides : récup les slides par leur class
+- instanciation de l'objet Diapo
+
+
+===> DIAPO.JS
+
+- constructor + argument
+- this.sides : récup slides
+
+- change() : jouer sur les z-index, 
+	setTimeout() : 5 min 
+
+- pause() : clearTimeout()
+
+- plusRight() : +1, slide suivante
+	met sur pause
+
+- plusLeft() : -1, slide précédente
+	met sur pause
+
+
+===> MAIN.JS
+
+- diapo.change() : lancement du diapo
+- jQuery : écoute des btns : chevrons, play, pause & touches clavier
+
+- canvas :instanciation
+
+
+===> CANVAS.JS
+
+- constructor : on définit les var this
+	⚠this.canvasWidth et height => besoin pr effacer le canvas !!
+
+- executeCanvas() : création du canvas, id=canvas, on met le canva dans canvasDiv
+	typeof : The typeof operator is used to get the data type (returns a string) of its operand. The operand can be either a literal or a data structure such as a variable, a function, or an object. The operator returns the data type.
+
+	pour que le canvas apparaisse dans Internet Explorer : le créer, l'initier et définir son contexte.
+
+- addClick() : on récup valeurs x, y, dragging et on les met dans les this. on les réutilise dans redraw() pr savoir où le trait doit réapparaitre
+
+- clearCanvas() : efface le canva avec clearRect() + efface les btns
+
+- redraw() : beginPath ?
+			 moveTo ?
+			 lineTo ?
+			 closePath ?
+			 stroke ?
+
+notes de OneNote : 
+
+New array()  => crée un tableau
+
+executeCanvas() => f° pr créer un canvas
+			= crée un canva sur internet explorer
+			
+Typeof => est un opérateur qui est suivi par son "opérande" (=c'est la valeur dont on veut savoir le type : string, nbre, bool…)
+
+
+.getContext() => f° de HTMLCanvasElement : retourne un contexte de dessin sur le caneva
+canvas.getContext(typeDeContexte, attributsDeContexte);
+
+.mousedown() => se déclenche qd le curseur est sur l'élément désiré, qd on clic dessus
+
+.mouseup() => le contraire : qd le curseur est dessus, mais souris relâchée, pas de clic dessus
+
+.mousemove() => qd la souris est à l'intérieur de l'élément
+
+Mouseleave => curseur en dehors de l'elt
+
+Pagex/y marchent seulement avec mouseEvent
+
+pageX => retourne les coordonnées horizontales x qd on clic sur l'elt
+PageY => retourne coordonnées verticales y
+
+offsetLeft => renvoie le nbre de pixel séparant l'elt du coin sup gauche
+offsetTop => renvoie le nbre de pixel séparant l'elt du haut de offsetParent (nœud)
+
+addClick [défini plus bas] => ça remplit les tableaux de clickX/Y/Dragging par les valeurs définies
+
+Push() => ajoute un nouvel elt à un tableau
+
+Redraw() => 
+
+clearCanvas() => met en noir transparent tt pixel dessiné sur le canva, supprime le contenu 
+
+void ctx.clearRect(x, y, largeur, hauteur);
+Coordonnée x et y indiquant le pt de départ du rectangle
+Largeur et hauteur du rectangle
+
+beginPath() => crée un nouveau chemin en supp les précédents sous-chemins
+
+moveTo => change les coordonnées de départ d'un sous-chemin par d'autres coordonnées
+
+lineTo => connecte le dernier pt du sous-chemin aux coordonnées x et y, en traçant une ligne droite invisible
+
+Stroke() => dessine la ligne droite en couleur
+
+closePath() => remet le stylo à son pt de départ en mettant une ligne droite entre les deux pts. Ne fais rien s'il n'y a qu'un seul pt.
+
+
+Touch Events : pour les écrans tactiles !
+Équivalent de mouse events
+
+changedTouches => son action dépend de l'évenement touch :
+Pour touchestart : donne la liste des pts rendus actifs par l'évenement
+Pour touchmove : liste des pts qui ont changé depuis l'évenement
+Pour touchend : liste des pts qui ont été effacés
+
+
+OPERATEUR CONDITIONNEL TERNAIRE
+var mouseX = (e.changedTouches ? e.changedTouches[0].pageX : e.pageX) - this.offsetLeft,
+== > si les pts st bien présents (la condition est remplie), on récupère la valeur première de pageX des pts actifs, sinon on prend la valeur de pageX actuel.
+
+*ça explique le ? et le :
+
+
+===> MAIN.JS
+
+- resizeCanvasSize() : se réfère à la taille du paragraph avec id=derniereEtape pour sa taille
+	window.addEventlistener : écoute la fenêtre et taille du canva change en fonct°
+
+
+- timer : récup les infos des localStorage et sessionStorage.adresse pr afficher dans le timer
+
+
+===> TIMER.JS
+
+- constructor : si timer déjà lancé une 1ere fois, récup données des sessionStorage et les applique au timer
+				sinon commence à 20 min
+
+- start() : lance le timer, décompte
+			crée items avec min et sec dans sesssionStorage
+			btn NewOrder : efface btns et arrête timer
+			qd arrive à 0 : supprime données du storage et arrête timer
+			affiche le timer qui décompte
+
+- setTimer() : relance le timer toutes les secondes
+
+
+===> FORM.JS
+
+- récup données de localStorage et les affiche pr faciliter une prochaine réinscription
+
+- btnReserve : récup values input et les met dans des var
+	e.preventDefault() => empêche de rafraichir la page
+	affiche diverses erreurs si manque des infos
+	si input rempli on vérifie qu'il y ait pas de caractères invalides et la longueur
+	met infos dans localStorage
+	(*vérifier si ligne 74 : sessionStorage.setItem("date1", Date.now()); == est-ce nécessaire ??)
+
+- btnValid : lance le timer avec setTimer()
+
+
+=================================================================================================================
+
+
+
+$('#canvas').mousedown(function(e){
+// Mouse down location
+	var offset = $('#canvasDiv').offset();  //on récup coordonnées de l'element canvasDiv
+	var mouseX = e.pageX - offset.left;  // qd on clique sur l'elt retourne les coordonnées x; différence entre ça et le nbre de pixel avec le coin sup gauche
+	var mouseY = e.pageY - offset.top;
+
+	canvas.paint = true;
+	canvas.addClick(mouseX, mouseY, false);
+	canvas.redraw();
+});
+
+$('#canvas').mousemove(function(e){
+	var offset = $('#canvasDiv').offset();
+	var mouseX = e.pageX - offset.left;
+	var mouseY = e.pageY - offset.top;
+
+	if(canvas.paint){
+		canvas.addClick(mouseX, mouseY, true);
+		canvas.redraw();
+		//nouveau btn : valider (apparait si on fait un trait)
+		var btnValid = document.getElementById('btnValid');
+		document.getElementById('btnValid').style.display = 'block';
+		document.getElementById('clearCanvas').style.display = 'block';
+
+		if (btnValid.style.display === 'block') {
+			document.getElementById('btnValidFinal').style.display = 'none';
+		}
+	}
+});
+
+$('#canvas').mouseup(function(e){
+	canvas.paint = false;
+	canvas.redraw();
+});
+
+$('#canvas').mouseleave(function(e){
+	canvas.paint = false;
+});
+
+$('#clearCanvas').mousedown(function(e)
+{
+	canvas.clickX = new Array();
+	canvas.clickY = new Array();
+	canvas.clickDrag = new Array();
+	canvas.clearCanvas(); 
+});
+
+$("#btnNewOrder").click(function(e){
+	canvas.clickX = new Array();
+	canvas.clickY = new Array();
+	canvas.clickDrag = new Array();
+	canvas.clearCanvas();
+});
+
+
+// Tactile ::::   Add touch event listeners to canvas element
+canvas.canvas.addEventListener("touchstart", function(e)
+{
+	// Mouse down location
+	var offset = $('#canvasDiv').offset();
+	var mouseX = (e.changedTouches ? e.changedTouches[0].pageX : e.pageX) - offset.left,
+	mouseY = (e.changedTouches ? e.changedTouches[0].pageY : e.pageY) - offset.top;
+	
+	canvas.paint = true;
+	canvas.addClick(mouseX, mouseY, false);
+	canvas.redraw();
+}, false);
+
+canvas.canvas.addEventListener("touchmove", function(e){
+	var offset = $('#canvasDiv').offset();
+	var mouseX = (e.changedTouches ? e.changedTouches[0].pageX : e.pageX) - offset.left,
+	mouseY = (e.changedTouches ? e.changedTouches[0].pageY : e.pageY) - offset.top;
+
+	if(canvas.paint){
+		//nouveau btn : valider (apparait si on fait un trait)
+		var btnValid = document.getElementById('btnValid');
+		document.getElementById('btnValid').style.display = 'block';
+
+		if (btnValid.style.display === 'block') {
+			document.getElementById('btnValidFinal').style.display = 'none';
+		}
+					
+		canvas.addClick(mouseX, mouseY, true);
+		canvas.redraw();
+		
+		document.getElementById('clearCanvas').style.display = 'block';
+	}
+	e.preventDefault()
+}, false);
+
+canvas.canvas.addEventListener("touchend", function(e){
+	canvas.paint = false;
+	canvas.redraw();
+}, false);
+
+canvas.canvas.addEventListener("touchcancel", function(e){
+	canvas.paint = false;
+}, false);
+
+
+
+
+
+
+
+
+
+
+
+

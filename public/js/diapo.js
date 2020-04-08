@@ -1,7 +1,5 @@
 class Diapo {
 
-
-
 	constructor(slides){
 		
 		this.slides = slides;
@@ -9,7 +7,6 @@ class Diapo {
 		this.x;
 		var play = document.getElementById("play");
 	}
-	
 	
 
 	change(){

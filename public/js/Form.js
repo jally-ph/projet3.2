@@ -4,18 +4,18 @@ if (localStorage.prenom && localStorage.nom ){
 	document.getElementById("inputNom").value = localStorage.nom;
 }
 
+if (sessionStorage.adresse){
+	document.getElementById("adresseMap").textContent = sessionStorage.adresse;
+	document.getElementById("adresseMapInput").value = sessionStorage.adresse;
+}
+
 $("#btnReserv").click(function(e){
 
-	//dès qu'on appuie sur reserv, les infos inscrites st mises dans sessionStorage 
-	//et LocalStorage
-	//et on fait en sorte que leur contenu apparaisse en valeur pour 
-	//l'inscription suivante (value = 'ce-qui-est-dans-les-Storage')
+	e.preventDefault();
 
 	var inputPrenom = document.getElementById("inputPrenom").value;
 	var inputNom = document.getElementById("inputNom").value;
 	var inputAdresse = document.getElementById("adresseMapInput").value;
-
-	e.preventDefault();
 
 	var errorPrenom = document.getElementById("zoneErrorPrenom");
 	var errorNom = document.getElementById("zoneErrorNom");
@@ -69,15 +69,15 @@ $("#btnReserv").click(function(e){
 				localStorage.setItem("prenom", inputPrenom);
 				localStorage.setItem("nom", inputNom);
 				sessionStorage.setItem("adresse", inputAdresse);
-				sessionStorage.setItem("date1", Date.now());
 				
 				//ancien btn
 				document.getElementById('btnReserv').style.display = 'none';
-
 				//timer ::: spanName
 				document.getElementById('spanName').textContent = localStorage.prenom + " " + localStorage.nom;
 				//spanAdresse
 				document.getElementById('spanAdresse').textContent = sessionStorage.adresse;
+				//message
+				document.getElementById('derniereEtape').style.opacity = 1;
 
 				// disabled les input 
 				document.getElementById('inputNom').setAttribute('disabled', 'disabled');
@@ -107,33 +107,39 @@ $("#btnValid").click(function(e){
 	document.getElementById('btnValid').style.display = 'none';
 	document.getElementById('clearCanvas').style.display = 'none';
 	document.getElementById('btnNewOrder').style.display = 'block';
-	
+	document.getElementById('btnValidFinal').style.display = 'block';
 	
 });
 
-$("#btnNewOrder").click(function(e){
-	e.preventDefault();
 
-	//timer à arrêter et à enlever
+
+$("#btnNewOrder").click(function(e){
+
 	document.getElementById('zoneTimer').style.display = 'none';
-	//document.getElementById('reservConfirm').style.display = 'block';
 	document.getElementById('btnNewOrder').style.display = 'none';
-	//faudrait que tt disparaisse
 	document.getElementById('canvasDiv').style.display = 'none';
-	//btnRserve revient
 	document.getElementById('btnReserv').style.display = 'block';
-	// disabled les input 
 	document.getElementById('adresseMap').style.display = 'block';
 	document.getElementById('inputNom').removeAttribute('disabled');
 	document.getElementById('inputPrenom').removeAttribute('disabled');
 
-	// session destroyed
-	// var timer = new Timer();
-	// timer.stopTimer();
-	// sessionStorage.removeItem('timerMin');
-	// sessionStorage.removeItem('timerSec');
+});
 
+$("#btnValidFinal").click(function(e){
+	e.preventDefault();
 
+	document.getElementById('zoneTimer').style.display = 'none';
+	document.getElementById('btnNewOrder').style.display = 'none';
+	document.getElementById('canvasDiv').style.display = 'none';
+	document.getElementById('derniereEtape').style.display = 'none';
+	document.getElementById('reservConfirm').style.display = 'block';
+	document.getElementById('btnValidFinal').style.display = 'none';
+
+	//timer ::: spanName
+	document.getElementById('spanName2').textContent = localStorage.prenom + " " + localStorage.nom;
+	//spanAdresse
+	document.getElementById('spanAdresse2').textContent = sessionStorage.adresse;
 
 });
+
 
